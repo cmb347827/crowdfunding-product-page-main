@@ -145,6 +145,9 @@ body {
       @include bg-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
     }
   }
+  .border-red{
+    border: 3px solid red;
+  }
   .btnWidth-150{
     width: 150px;
   }

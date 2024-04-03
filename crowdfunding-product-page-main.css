@@ -12989,6 +12989,8 @@ body {
     #main .green:hover {
       background-color: "British Racing Green";
       background-color: #147b74; }
+  #main .border-red {
+    border: 3px solid red; }
   #main .btnWidth-150 {
     width: 150px; }
   #main .btnWidth-200 {
