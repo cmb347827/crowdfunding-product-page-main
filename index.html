@@ -102,12 +102,8 @@
                 
                 
             </section>
-            <section>
-                <!-- Selection modal start -->
-                <!--pop up outer-->
-                <!--the hide-for-all-screens class ,hides this parent element see scss file-->
-                <!--the pop-up class ,shows this parent element when js-pop-up-btn buttons are clicked ,see js file-->
-                <div  class="hide-for-all-screens js-pop-up move-up top-z-index white-non-opaque-background border-red" >
+            <!-- Selection modal start -->
+            <dialog  class="js-first-modal" >
                     <div class="d-flex">
                        <div>
                           <h3>Back this project</h3>
@@ -196,16 +192,15 @@
                         <!-- Selection modal end -->
                         </fieldset>
                     </form>
-                </div>
-            </section>
-            <div id="success-message" class="hide-for-all-screens move-up top-z-index white-non-opaque-background js-pop-up-success">
+            </dialog>
+            <dialog id="success-message" class="js-second-modal">
                 <!-- Success modal start -->
                 <h5>Thanks for your support!</h5>
                 <p>Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
                 an email once our campaign is completed.</p>
                 <button class='js-closeSuccess' type='button'>Got it!</button>
                <!-- Success modal end -->
-            </div>
+            </dialog>
       </main>
           <footer id='bottom-footer'>
               <div class="attribution mt-5">
