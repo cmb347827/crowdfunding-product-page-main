@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/yxgKFKLM/favicon-32x32.png">
+   
+    <link rel='stylesheet' href='crowdfunding-product-page-main.css' type='text/css'>
+    <title>Frontend Mentor | Crowdfunding product page</title>
+
+  
+</head>
+<body>
+    
+    <header id='header' class='d-flex justify-content-xxl-around align-items-xxl-center'>
+        <img aria-hidden="true" class='top-z-index' src="./images/logo.svg" alt="" width="128" height="20">
+        <nav aria-labelledby='navbarCollapse' id='nav' class="container-fluid navbar navbar-expand-xxl d-xxl-flex align-items-start justify-content-end ">
+             <button aria-label='Menu' id='menubutton' type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+               <svg id='open' class="top-z-index" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z"/></g></svg>
+               <svg id='closed' class='hidden top-z-index' width="14" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M2.404.782l11.314 11.314-2.122 2.122L.282 2.904z"/><path d="M.282 12.096L11.596.782l2.122 2.122L2.404 14.218z"/></g></svg>
+             </button>
+             <div class="collapse navbar-collapse d-xxl-flex justify-content-end" id="navbarCollapse">
+                  <div class="navbar-nav">
+                     <a href="#" class="nav-item nav-link active">About</a>
+                     <a href="#" class="nav-item nav-link">Blog</a>
+                     <a href="#" class="nav-item nav-link">Account</a>
+                  </div>
+              </div> 
+         </nav>
+    </header>
+    <main id='main' class="border-0">
+            <section class="border">
+                <svg id='logo' class="mx-auto" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd"><circle fill="#000" cx="28" cy="28" r="28"/>
+                        <g fill-rule="nonzero"><path d="M15.565 28.565a1.93 1.93 0 012.606-.113l.122.113 10.142 10.142a1.93 1.93 0 01-2.606 2.84l-.122-.112-10.142-10.142a1.93 1.93 0 010-2.728z" fill="#444"/><path d="M36.19 17.48c1.006-.996 2.706-.34 2.805 1.026l.005.126v10.736c0 .9-.737 1.629-1.646 1.629a1.64 1.64 0 01-1.642-1.507l-.005-.122v-6.805l-8.043 7.957c-1.006.996-2.707.34-2.806-1.026l-.004-.126v-6.805L16.81 30.52a1.66 1.66 0 01-2.224.095l-.105-.095a1.616 1.616 0 01-.096-2.2l.096-.103L25.336 17.48c1.006-.996 2.707-.34 2.806 1.026l.004.126v6.804l8.043-7.956z" fill="#FFF"/>
+                        </g>
+                    </g>
+                </svg>
+                <h1>Mastercraft Bamboo Monitor Riser</h1>
+                <p>A beautiful & handcrafted monitor stand to reduce neck and eye strain.</p>
+                <div>
+                   <button aria-disabled="false" class="btn btn-primary js-pop-up-btn green btnWidth-200">Back this project</button>
+                   <button type="button" class="btn btn-primary btn-sm rounded green btnWidth-150" id="bookmark">
+                      <svg  width="56" height="56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#2F2F2F" cx="28" cy="28" r="28"/><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g></svg>
+                      Bookmark
+                    </button>
+                 
+                </div>
+            </section>
+            <div class='mb-5 mt-5 border' aria-label="">
+                <div>
+                    <p>&#x24;<span id='raised'>89,914</span> of &#x24;<span id='total'>100,000</span> backed</p>
+                    <p><span id="backers">5,007 </span> backers</p>
+                    <p><span id='days'>56</span> days left</p>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-width"></div>
+                </div>
+            </div>
+            <section class="border">
+                <h2>About this project</h2>
+
+                <p class="mt-xxl-3 mb-xxl-3 mb-2 mt-2">The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform that elevates your screen 
+                to a more comfortable viewing height. Placing your monitor at eye level has the potential to improve 
+                your posture and make you more comfortable while at work, helping you stay focused on the task at hand</p>
+
+                <p class="mt-xxl-3 mb-xxl-3 mb-2 mt-2">Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer 
+                to allow notepads, pens, and USB sticks to be stored under the stand.</p>
+                <div>
+                    <div class="mt-5 mb-5 p-xxl-4 p-1">
+                        <div>
+                            <h3>Bamboo Stand</h3>
+                            <h4>Pledge &#x24;<span class='js-donate-amount'>0</span> or more</h4>
+                        </div>
+                        <p>You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
+                        you’ll be added to a special Backer member list.</p>
+                        <p><span class="bamboo-left">101</span> left</p>
+                        <button aria-disabled="false" class="js-pop-up-btn green btnWidth-150"> Select Reward </button>
+                    </div>
+                    <div class="mt-5 mb-5 p-xxl-4 p-1">
+                        <div>
+                            <h3>Black Edition Stand</h3>
+                            <h4>Pledge &#x24;<span class='js-donate-amount'>0</span> or more</h4>
+                        </div>
+                        <p>You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
+                        member list. Shipping is included.</p>
+                        <p><span class="black-left">64</span>left</p>
+                        <button aria-disabled="false" class="js-pop-up-btn green btnWidth-150">Select Reward</button>
+                    </div>
+                    <div class="mt-5 mb-5 p-xxl-4 p-1">
+                        <div>
+                            <h3>Mahogany Special Edition</h3>
+                            <h4>Pledge &#x24;<span class='js-donate-amount'>0</span> or more</h4>
+                        </div>
+                        <p>You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+                        to our Backer member list. Shipping is included.</p>
+                        <p><span class="mahogany-left">1</span> left</p>
+                        <button aria-disabled="false" class="js-pop-up-btn green btnWidth-150">Select Reward</button>
+                    </div>
+                </div>
+                
+                
+            </section>
+            <section>
+                <!-- Selection modal start -->
+                <!--pop up outer-->
+                <!--the hide-for-all-screens class ,hides this parent element see scss file-->
+                <!--the pop-up class ,shows this parent element when js-pop-up-btn buttons are clicked ,see js file-->
+                <div  class="hide-for-all-screens js-pop-up move-up top-z-index white-non-opaque-background" >
+                    <div class="d-flex">
+                       <div>
+                          <h3>Back this project</h3>
+                          <p>Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?</p>
+                       </div>
+                       <button type="button" class="btn-close js-closeModal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="#">
+                        <fieldset>
+                            <div class="inner">
+                                    <div>
+                                        <input data-disabled="false" value='0' type="radio" name='pledge' id="pledge-0-selected" class="js-pledge-reward">
+                                        <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-0-selected'>Pledge with no reward</label>
+                                        <p>Choose to support us without a reward if you simply believe in our project. As a backer, 
+                                            you will be signed up to receive product updates via email.</p>
+                                    </div>
+                                    <div class="inner-pledge-collapse">
+                                        <input data-disabled="false" value='0' name='pledge' id='pledge-0-checked' class="toggle" type="checkbox" />
+                                        <label for='pledge-0-checked' class="js-donate-amount-0"><span class='visually-hidden'>Select the zero dollar reward pledge</span></label>
+                                        <button data-disabled="false" type="button" class="js-closeBackProject green btnWidth-150">Continue</button>
+                                    </div>
+                            </div>
+                            <div class="inner">
+                                    <div>
+                                        <h4>Bamboo Stand</h4>
+                                        <input data-disabled="false" value="25" type='radio' name='pledge' id='pledge-25-selected' class="js-pledge-reward">
+                                        <label aria-label='Here you check the pledge but don"t select it yet' for="pledge-25-selected" class="pledge-collapse">Pledge $25 or more</label>
+                                        <p>You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
+                                            you’ll be added to a special Backer member list.</p>
+                                        <p><span class="bamboo-left">101</span> left</p>
+                                    </div>
+                                    <div class="inner-pledge-collapse">
+                                        <!-- Selected pledge start -->
+                                        <!--show inner-->
+                                        <h4>Enter your pledge</h4>
+                                        <div>
+                                        <input data-disabled="false" value='25' name='pledge' id='pledge-25-checked' class="toggle" type="checkbox" />
+                                        <label for='pledge-25-checked' class="js-donate-amount-0"><span class='visually-hidden'>Select the 25 dollar reward pledge</span></label>
+                                        <button data-disabled="false" type="button" class="js-closeBackProject green btnWidth-150">Continue</button>
+                                        </div>
+                                        <!-- Selected pledge end -->
+                                    </div>
+                            </div>
+                            <div class="inner">
+                                    <div>
+                                        <h4>Black Edition Stand</h4>
+                                        <input data-disabled="false" value='75' type="radio" name="pledge" id="pledge-75-selected" class="js-pledge-reward">
+                                        <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-75-selected'>$75 or more</label>
+                                        <p>You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
+                                        member list. Shipping is included.</p>
+                                        <p><span class="black-left">64 </span>left</p>
+                                    </div>
+                                    <div class="inner-pledge-collapse">
+                                        <!-- Selected pledge start -->
+                                        <!--show inner-->
+                                        <h4>Enter your pledge</h4>
+                                        <div>
+                                            <input data-disabled="false" value='75' name='pledge' id='pledge-75-checked' class="toggle" type="checkbox" />
+                                            <label for='pledge-75-checked' class="js-donate-amount-0"><span class='visually-hidden'>Select the 75 dollar reward pledge</span></label>
+                                            <button data-disabled="false" type="button" class="js-closeBackProject green btnWidth-150">Continue</button>
+                                        </div>
+                                        <!-- Selected pledge end -->
+                                    </div>
+                            </div>
+                            <div class="inner">
+                                <div>
+                                        <h4>Mahogany Special Edition</h4>
+                                        <input data-disabled="false" value='200' type="radio" name="pledge" id="pledge-200-selected" class="js-pledge-reward">
+                                        <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-200-selected'>Pledge $200 or more</label>
+                                        <p>You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added
+                                        to our Backer member list. Shipping is included.</p>
+                                        <p><span class="mahogany-left">1</span> left</p>
+                                </div>
+                                <div class="inner-pledge-collapse">
+                                        <!-- Selected pledge  start -->
+                                        <!--show inner-->
+                                        <h4>Enter your pledge</h4>
+                                        <div>
+                                            <input  data-disabled="false" value='200' name='pledge' id='pledge-200-checked' class="toggle" type="checkbox" />
+                                            <label for='pledge-200-checked' class="js-donate-amount-0"><span class='visually-hidden'>Select the 200 dollar reward pledge</span></label>
+                                            <button data-disabled="false" type="button" class="js-closeBackProject green btnWidth-150">Continue</button>
+                                        </div>
+                                        <!-- Selected pledge end -->
+                                </div>
+                            </div>
+                        <!-- Selection modal end -->
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+            <div id="success-message" class="hide-for-all-screens move-up top-z-index white-non-opaque-background js-pop-up-success">
+                <!-- Success modal start -->
+                <h5>Thanks for your support!</h5>
+                <p>Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
+                an email once our campaign is completed.</p>
+                <button class='js-closeSuccess' type='button'>Got it!</button>
+               <!-- Success modal end -->
+            </div>
+      </main>
+          <footer id='bottom-footer'>
+              <div class="attribution mt-5">
+                  <span class='me-2'>Challenge by</span><address><a class='me-2' href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a></address>
+                  <span class='me-2'>Coded by</span><address><a href="https://www.frontendmentor.io/profile/cmb347827">CMB</a></address>
+              </div>
+        </footer>	
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <script src='crowdfunding-product-page-main.js'></script>
+</body>
+</html>

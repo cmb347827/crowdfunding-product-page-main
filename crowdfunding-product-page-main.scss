@@ -1,0 +1,234 @@
+
+ 
+@import 'custom.scss';
+@import '_globals.scss';
+
+$colors: (
+  White: hsl(0, 0%, 100%),
+  Black: hsl(0, 0%, 0%),
+  Dark Gray: hsl(0, 0%, 55%),
+  Moderate cyan: hsl(176, 50%, 47%),
+  Dark cyan: hsl(176, 72%, 28%),
+);
+$fallback-colors: (
+  White Black #999999 Aquamarine4 'British Racing Green'
+);
+
+@mixin font-color($color, $fallback-color) {
+  color: $fallback-color;
+  color: $color;
+}
+
+@mixin bg-color($color, $fallback-color) {
+  background-color: $fallback-color;
+  background-color: $color;
+}
+
+
+@mixin border-radius($radius...) {
+  border-radius: $radius;
+}
+@mixin margin($args...) {
+  margin: $args;
+}
+@mixin padding($args...) {
+  padding: $args;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+html{
+  @include bg-color(map-get($colors,Dark Gray),nth($fallback-colors,3));
+}
+body {
+  font: {
+     //default 16 px.
+     size: 100%; 
+     weight: $font_weight-normal;
+     family: "Alata", sans-serif;
+  }
+  
+}
+.addOpacity{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.hide-for-all-screens{
+  display:none;
+}
+.show-for-all-screens{
+  display:block;
+}
+.hidden{
+  display:none;
+  @media screen and(min-width:$container__form-xxl){
+     display:block;
+  }
+}
+.show{
+  display:block;
+  @include media-breakpoint-up(xxl){
+     display:none;
+  }
+}
+.top-z-index{
+  //needed for z-index.
+  position: relative;
+  z-index: 1;
+  opacity:1;
+}
+
+#header{
+  width: $container__form-xs;
+  @include margin(0 auto);  
+  @include padding(50px 15px);
+  background: url(./images/image-hero-mobile.jpg) center center/100% 100% no-repeat;
+  z-index:0;
+  
+  #nav{
+    #menubutton{
+       position:relative;
+       bottom: 15px;
+    }
+    a{
+      @include font-color(map-get($colors,white),nth($fallback-colors,1));
+      @include media-breakpoint-up(xxl){
+        &:hover{
+          cursor:pointer;
+        }
+      }
+    }
+    #navbarCollapse{
+       
+      @include media-breakpoint-down(xxl){
+         .navbar-nav{
+            @include padding(30px 10px);
+            @include bg-color(map-get($colors,black),nth($fallback-colors,2));
+            
+            //position absolute is used, so the menu is positioned on-top of header background without pushing contents down.
+            position: absolute;
+            right:-15px;
+            top:-1em;
+            width: 375px;
+         }
+      }
+    }
+  }
+  @include media-breakpoint-up(xxl){
+    //wanted to use only padding instead of setting a min-height, but then justify-content-around to disperse the elements across the y-axis doesn't work.
+    @include padding(0 150px);
+    width:$container__form-xxl;
+    min-height:430px;
+    background: url(./images/image-hero-desktop.jpg) center center/100% 100% no-repeat;
+  }
+}
+
+#main{
+  width:$container__form-xs;
+  @include margin(0 auto); 
+  margin-top: 20px;
+  z-index:1;
+ 
+  > section, > div{
+     @include bg-color(map-get($colors,white),nth($fallback-colors,1));
+  }
+  #logo{
+    position:relative;
+    top:-35px;
+    display:block;
+  }
+  .green{
+    @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+    &:hover{
+      @include bg-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
+    }
+  }
+  .btnWidth-150{
+    width: 150px;
+  }
+  .btnWidth-200{
+    width: 200px;
+  }
+  .progress-bar{
+    @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+  }
+  .inner-pledge-collapse{
+    display:none;
+  }
+  .inner:has([name=pledge]:checked)  .inner-pledge-collapse{
+    display:block;
+  }
+  .toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 62px;
+    height: 32px;
+    display: inline-block;
+    position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    outline: 2px solid gray;
+    cursor: pointer;
+    @include bg-color(map-get($colors,white),nth($fallback-colors,1));
+    transition: background-color ease 0.3s;
+  }
+  
+  .toggle:before {
+    content: "|";
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    font: 10px/28px Helvetica;
+    font-weight: bold;
+    text-indent: -22px;
+    word-spacing: 37px;
+    color: #fff;
+    white-space: nowrap;
+    transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+  }
+  
+  .toggle:checked {
+    @include bg-color(map-get($colors,white),nth($fallback-colors,1));
+  }
+  
+  .toggle:checked:before {
+    left: 32px;
+  }
+  .white-non-opaque-background{
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .move-up{
+     top:-100em;
+  }
+  @include media-breakpoint-up(xxl){
+    margin-top: -300px;
+     width: $container__form-xxl;
+     @include padding(150px);
+     > section, > div:not(#success-message){
+          width:$container__form-l;
+          @include margin(50px auto);
+     }
+  }
+  
+}
+
+
+#bottom-footer {
+.attribution {
+  font-size: $font_size-8;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+}
+
