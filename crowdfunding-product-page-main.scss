@@ -45,21 +45,42 @@ html{
 }
 body {
   font: {
-     //default 16 px.
+     //default 16 px/1rem.
      size: 100%; 
      weight: $font_weight-normal;
-     family: "Alata", sans-serif;
+     family:"Commissioner", sans-serif;
   }
-  
 }
-.addOpacity{
-  background-color: rgba(0, 0, 0, 0.1);
+
+//adds a green border when a pledge is checked
+.inner:has(input[type='radio']:checked  ) {      
+    border:3px solid map-get($colors,Dark cyan);
 }
-.hide-for-all-screens{
+
+.bookmark-gray{
+  @include bg-color(lighten(map-get($colors,Dark Gray),18),nth($fallback-colors,3));
+  @include font-color(map-get($colors,Black),nth($fallback-colors,2));
+  svg{
+    & circle{
+      fill:#2F2F2F;
+    }
+  }
+}
+.bookmark-blue{
+  @include bg-color(lighten(map-get($colors,Moderate cyan),18),nth($fallback-colors,4));
+  @include font-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
+  svg {
+    & circle {
+      fill: map-get($colors,Moderate cyan);
+    }
+  }   
+}
+
+.disabled-overlay{
+  opacity:0.5;
+}
+.hide{
   display:none;
-}
-.show-for-all-screens{
-  display:block;
 }
 .hidden{
   display:none;
@@ -92,6 +113,7 @@ body {
        position:relative;
        bottom: 15px;
     }
+    
     a{
       @include font-color(map-get($colors,white),nth($fallback-colors,1));
       @include media-breakpoint-up(xxl){
@@ -101,7 +123,7 @@ body {
       }
     }
     #navbarCollapse{
-       
+      
       @include media-breakpoint-down(xxl){
          .navbar-nav{
             @include padding(30px 10px);
@@ -130,7 +152,18 @@ body {
   @include margin(0 auto); 
   margin-top: 20px;
   z-index:1;
- 
+  .desktop{
+    display:none;
+    @include media-breakpoint-up(xxl){
+      display:block;
+    }
+  }
+  .mobile{
+    display:block;
+    @include media-breakpoint-up(xxl){
+      display:none;
+    }
+  }
   > section, > div{
      @include bg-color(map-get($colors,white),nth($fallback-colors,1));
   }
@@ -139,14 +172,56 @@ body {
     top:-35px;
     display:block;
   }
+  dialog{
+    width:$container__form-xs;
+    @include media-breakpoint-up(xxl){
+      width:$container__form-l;
+    }
+    &.smaller-width{
+      @include media-breakpoint-up(xxl){
+        width:$container__form-md;
+      }
+    }
+    form{
+      .inner-pledge-collapse{
+        min-height: 100px;
+      }
+    }
+  }
+  .green-font{
+    @include font-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+  }
   .green{
     @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
     &:hover{
       @include bg-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
     }
   }
-  .border-red{
-    border: 3px solid red;
+  .move-down{
+    position:relative;
+    top:5px;
+  }
+  .move-left{
+    position:relative;
+    right: 60px;
+  }
+  .move-up{
+    position:relative;
+    bottom: 15px;
+  }
+ 
+  .svg{
+    svg{
+      position:relative;
+      top:-10px;
+      left:-10px;
+      transform:scale(0.5,0.5);
+    }
+  }
+  button{
+    height: 40px;
+    border:none;
+    border-radius: 20px;
   }
   .btnWidth-150{
     width: 150px;
@@ -163,9 +238,8 @@ body {
   .inner:has([name=pledge]:checked)  .inner-pledge-collapse{
     display:block;
   }
-  .toggle {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  
+  .toggle,.toggle:not(:checked){
     appearance: none;
     width: 62px;
     height: 32px;
@@ -174,44 +248,44 @@ body {
     border-radius: 50px;
     overflow: hidden;
     outline: 2px solid gray;
-    cursor: pointer;
+    //cursor: pointer;
     @include bg-color(map-get($colors,white),nth($fallback-colors,1));
     transition: background-color ease 0.3s;
   }
   
-  .toggle:before {
+  .toggle::before {
     content: "|";
     display: block;
     position: absolute;
     z-index: 2;
-    width: 28px;
-    height: 28px;
-    background: #fff;
-    left: 2px;
-    top: 2px;
-    border-radius: 50%;
-    font: 10px/28px Helvetica;
-    font-weight: bold;
-    text-indent: -22px;
-    word-spacing: 37px;
-    color: #fff;
-    white-space: nowrap;
+    width: 4px;
+    background: gray;
+    left: 35px;
+    //white-space: nowrap;
     transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
   }
   
   .toggle:checked {
-    @include bg-color(map-get($colors,white),nth($fallback-colors,1));
+    @include bg-color(lighten(map-get($colors,Moderate cyan),12),nth($fallback-colors,4));
+    &:not(:focus){
+      @include bg-color(lighten(map-get($colors,white),12),nth($fallback-colors,1));
+      //resets the toggle button position to start when toggle is out of focus(dialog close).
+      &::before{
+        left:35px;
+      }
+    }
+    &::before{
+      //once the toggle is checked, the toggle button moves to the right.
+      left: 60px;
+    }
   }
   
-  .toggle:checked:before {
-    left: 32px;
-  }
+  
+  
   .white-non-opaque-background{
     background-color: rgba(255, 255, 255, 1);
   }
-  .move-up{
-     top:-100em;
-  }
+  
   @include media-breakpoint-up(xxl){
     margin-top: -300px;
      width: $container__form-xxl;

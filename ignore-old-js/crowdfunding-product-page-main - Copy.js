@@ -9,18 +9,21 @@ const colors ={
 const data={
 	navbar: document.getElementById('navbarCollapse'),
     openNav: document.querySelector('#open'),
-	main:document.querySelector('#main'),
+	overlay: document.querySelector('.overlay'),
+	bookmark: document.querySelector('#bookmark'),
+	buttonHTML:`empty`,
+
 	donateAmounts: [25,75,200],
 	donateWithZeroAmounts:['0','25','75','200'],
 	addDonateAmounts: document.querySelectorAll('.js-donate-amount'),
 	addDonateWithZeroAmounts: document.querySelectorAll('.js-donate-amount-0'),
 	toggleInputs:document.querySelectorAll('.toggle'),
 
-	outerElement:document.querySelector('.js-pop-up'),
+	first_dialog:document.querySelector('.js-first-modal'),
 	selectRewardBtns : document.querySelectorAll('.js-pop-up-btn'),
 	pledgeReward:document.querySelectorAll('.js-pledge-reward'),
 	closeBackProject:document.querySelectorAll('.js-closeBackProject'),
-	successMessage: document.querySelector('.js-pop-up-success'),
+	second_dialog: document.querySelector('.js-second-modal'),
 	closeSuccess:document.querySelector('.js-closeSuccess'),
 	closeModal: document.querySelector('.js-closeModal'),
 
@@ -41,24 +44,35 @@ $(window).resize(function(){
 function handleNavBar(){
 	//show/close the menu 
 	(data.navbar).addEventListener('change',()=>{
+		
 		this.on("show.bs.collapse", function(){
 			//menu is collapsed, show close icon.
 			$('#open').toggleClass('hidden');
 			$('#closed').toggleClass('show');
 		});
 		this.on("hide.bs.collapse", function(){
+			
 			$('#closed').toggleClass('show');
 			$('#open').toggleClass('hidden');
 		});
 	});
 	//on opened menu , add background color to cover main
 	(data.openNav).addEventListener('click',()=>{
-		addRemoveClass(data.main,'addOpacity');
+		//document.querySelector(".overlay").style.display = "block";
+		$('.overlay').toggleClass('show');
 	});
 }
 
 
 function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
+	(collapsedInputs).forEach((toggle)=>{
+        toggle.setAttribute('aria-disabled','false');
+		$('input').removeAttr('checked');
+	});
+	(noncollapsedInputs).forEach((toggle)=>{
+        toggle.setAttribute('aria-disabled','false');
+		$('input').removeAttr('checked');
+	});
 	(noncollapsedInputs).forEach((input,index)=>{
 		//the non-collapsable input of the popped up 'back this project'
 		if(index===0){
@@ -69,17 +83,17 @@ function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
 				if(index===(++pledgeIndex)){
 					//the 'out of stock' pledge.
 					//disable the js-pledge-reward input
-					input.disabled=true;
+					input.setAttribute('aria-disabled','true');
 					$('input').removeAttr('checked');
 					//also disable the accompanying collapsable toggle class input
 					(collapsedInputs).forEach((toggle,indexToggle)=>{
 						if(indexToggle=== pledgeIndex){
-						   toggle.disabled= true;
+							toggle.setAttribute('aria-disabled','true');
 						   $('toggle').removeAttr('checked');
 						}
 					});
 				}else{
-					input.disabled=false;
+					input.setAttribute('aria-disabled','false');
 				}
 			});
 		}               
@@ -89,35 +103,31 @@ function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
 function handlebackProject(){
 	//pops up the 'back this project' popup
 	data.selectRewardBtns.forEach((btn)=>{
+		//first load only
+		btn.setAttribute('aria-disabled','false');
 		btn.addEventListener('click',(event)=>{
-			if(btn.hasAttribute('aria-disabled','false')){	
-				//adds a grayish background behind the popped up modal.
-				addRemoveClass(data.main,'addOpacity');
-				//pops up the 'back this project' popup
-				addRemoveClass(data.outerElement,'show-for-all-screens');
-				//.js-pop-up-btn (selectRewardBtns) should be disabled when the 'outerElement' pops up.
+			const aria= btn.getAttribute('aria-disabled');
+			if(aria === 'false'){
+                (data.first_dialog).showModal();
 			}
 		});
     });
 	//closes the 'back this project' popup
 	data.closeBackProject.forEach((btn)=>{
 	    btn.addEventListener('click',(event)=>{
-			//hide the 'back this project' popup again
-			addRemoveClass(data.outerElement,'show-for-all-screens');
-			//pop up a success message
+			(data.first_dialog).close();
 			handleSuccess();
 	    });
     });
 	//also closes the 'back this project' popup with the black x
 	(data.closeModal).addEventListener('click',()=>{
-		addRemoveClass(data.outerElement,'show-for-all-screens');
-		addRemoveClass(data.main,'addOpacity');
+		(data.first_dialog).close();
 	});
 
 }
 function handleSuccess(){
 	//show success message 
-	addRemoveClass(data.successMessage,'show-for-all-screens');
+	(data.second_dialog).showModal();
 	//close success message
 	data.closeSuccess.addEventListener('click',(event)=>{
 		//Disable the 'out of stock' pledge buttons
@@ -127,18 +137,8 @@ function handleSuccess(){
 		const emptyPledges= getOutofstockpledges();
 		disableOutStockInputs(emptyPledges,data.pledgeReward,data.toggleInputs);
 
-		addRemoveClass(data.successMessage,'show-for-all-screens');
-		//remove grayed out background behind 'success' visible popup
-		addRemoveClass(data.main,'addOpacity'); 
+		(data.second_dialog).close();
 	}, {once : true});
-}
-
-function addRemoveClass(el,classToAdd){
-	if($(el).hasClass(classToAdd)){
-		$(el).removeClass(classToAdd);
-	}else{
-		$(el).addClass(classToAdd);
-	}
 }
 
 function dataProgress(){
@@ -151,8 +151,8 @@ function dataProgress(){
 }
 
 
-//bamboo=0,black=1,mahogany=2  ++1
-//btns= 0 (skip),1 ,2, 3.
+//resultarray: bamboo=0,black=1,mahogany=2  so ++1 as 'back this project' button is 0
+//selectRewardBtns= 0 (skip),1 ,2, 3.
 function setButtonTextDisabled(resultArray){
 	(data.selectRewardBtns).forEach((btn,indexOuter)=>{
 		resultArray.forEach((pledgeindex,index)=>{
@@ -161,13 +161,11 @@ function setButtonTextDisabled(resultArray){
 			if(indexOuter>0){
 		        ++pledgeindex;
 				if(indexOuter===pledgeindex){
-					btn.textContent= 'Out of stock';
-					//btn.disabled=true;                                << this not acceptable !?
+					btn.textContent= 'Out of stock';                               
 					btn.setAttribute('aria-disabled','true');
 					
 				}else {
 					btn.textContent = 'Select Reward';
-					
 					btn.setAttribute('aria-disabled','false');
 					
 				}
@@ -228,36 +226,42 @@ function display(){
    data.pledgeReward.forEach((input,index)=>{
 	   //below the user selected a input on the 'back this project' popup (outerElement) example id="pledge-0-selected"
 	  
-      input.addEventListener('click',(event)=>{
-		    //remove checked status, so user could later pledge more pledges.
-		    $('input').removeAttr('checked');
-		    //check if 'enter your pledge' toggle button is clicked example id='pledge-0-checked', it means the value of the pledge can then be added to the 'raised' amount + number of backers increased by 1
-			indexInput=index;
+        input.addEventListener('click',(event)=>{
+		    const aria= input.getAttribute('aria-disabled');
+		    if(aria === 'false'){
+				//remove checked status, so user could later pledge more pledges.
+				$('input').removeAttr('checked');
+				//check if 'enter your pledge' toggle button is clicked example id='pledge-0-checked', it means the value of the pledge can then be added to the 'raised' amount + number of backers increased by 1
+				indexInput=index;
+			}
 	   });
    });
    data.toggleInputs.forEach((toggle,index)=>{
 
 		//toggle button is clicked
 		toggle.addEventListener('click',(event)=>{
-			//remove checked status, so user could pledge more pledges.
-			$('toggle').removeAttr('checked');
-			//disable the pressed toggle button so the user cant double/triple click. Enabled again in enableInStockInputs().Called line 130.
-			toggle.disabled=true;
-			
-			if((indexInput===index) ){
-				//console.log('in loop indexinput ',indexInput,' index ',index);
-				//The input class='toggle' is the input below the input class=js-pledge-reward for this particular pledge.
-				//so pledge is only added to total raised when the user clicks the class='toggle' input as well.
-				const amount= Number((data.pledgeReward)[indexInput].value);
-				raised +=amount;
-				backers++;
-				(data.raised).textContent= raised.toLocaleString();
-				(data.backers).textContent= backers.toLocaleString();
-				//update the progress bar 
-				dataProgress();
-				//update the number of pledges left for the selected pledge.
-				updateLeft(amount);
+            const aria= toggle.getAttribute('aria-disabled');
+			if(aria === 'false'){
+				//remove checked status, so user could pledge more pledges.
+				$('toggle').removeAttr('checked');
+				//disable the pressed toggle button so the user cant double/triple click. Enabled again in disableOutStockInputs().
+				toggle.setAttribute('aria-disabled','true');
+				
+				if((indexInput===index) ){
+					//console.log('in loop indexinput ',indexInput,' index ',index);
+					//The input class='toggle' is the input below the input class=js-pledge-reward for this particular pledge.
+					//so pledge is only added to total raised when the user clicks the class='toggle' input as well.
+					const amount= Number((data.pledgeReward)[indexInput].value);
+					raised +=amount;
+					backers++;
+					(data.raised).textContent= raised.toLocaleString();
+					(data.backers).textContent= backers.toLocaleString();
+					//update the progress bar 
+					dataProgress();
+					//update the number of pledges left for the selected pledge.
+					updateLeft(amount);
 
+				}
 			}
 		});
     });
@@ -291,8 +295,47 @@ function loadDonations(){
         element.textContent = (data.donateWithZeroAmounts)[index];
 	});
 }
+
+(data.bookmark).addEventListener('click',() => loadButton(data.bookmark));
+
+function loadButton(bookmark){
+	
+	const svg =`<svg  width="56" height="56" xmlns="http://www.w3.org/2000/svg"
+		               aria-labelledby="button-label">
+					   <title id="button-label">Bookmark</title>
+					   <g fill="none" fill-rule="evenodd"><circle fill="" cx="28" cy="28" r="28"/>
+					   <path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"/></g>
+	                </svg>`;
+				
+    if (data.buttonHTML===`empty`) {
+        if((bookmark).classList.contains("bookmark-gray")===false){
+           $(bookmark).addClass('bookmark-gray');
+		} 
+		(bookmark).innerHTML = `${svg} <span class='move-down'>Bookmark</span>`;
+		data.buttonHTML=`${svg} Bookmark`;
+		
+	}   else if(data.buttonHTML=== `${svg} Bookmark`){
+		if((bookmark).classList.contains("bookmark-gray")){
+			$(bookmark).removeClass('bookmark-gray');
+			$(bookmark).addClass('bookmark-blue');
+		} 
+		(bookmark).innerHTML =`${svg} <span class='move-down'>Bookmarked</span>`;
+		data.buttonHTML=`${svg} Bookmarked`;
+	} else {
+		if((bookmark).classList.contains("bookmark-gray")===false){
+			$(bookmark).addClass('bookmark-gray');
+		} 
+		if((bookmark).classList.contains("bookmark-blue")===true){
+			$(bookmark).removeClass('bookmark-blue');
+		} 
+		(bookmark).innerHTML= `${svg} <span class='move-down'>Bookmark</span>`;
+		data.buttonHTML=`${svg} Bookmark`;
+	}
+	
+}
 $(window).on('load',function(){
    loadDonations();
+   loadButton(data.bookmark);
    handlebackProject();
    display();
    handleNavBar();
