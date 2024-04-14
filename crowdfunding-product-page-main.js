@@ -169,7 +169,7 @@ function dataProgress(){
 	const raised = Number((data.raised).textContent.replace(',',''));
 	const total = Number((data.total).textContent.replace(',',''));
 	let progressWidth=raised/total *100;
-
+   
     $(data.progress).css('width',`${progressWidth}%`);
 }
 
@@ -268,6 +268,7 @@ function display(){
 				//remove checked status, so user could pledge more pledges.
 				$('toggle').removeAttr('checked');
 				//disable the pressed toggle button so the user cant double/triple click. Enabled again in disableOutStockInputs().(zie aria===false)
+				//can only choose each pledge once every time the 'back this project' modal pops up !!! 
 				toggle.setAttribute('aria-disabled','true');
 				
 				if((indexInput===index) ){
@@ -297,7 +298,7 @@ Date.prototype.addDays = function(days) {
 function updateDays(){
 	//'now' and plus 56 days is always going to be 56 days apart if the Date() constructor is empty.
 	// I picked a fixed date with time (date posted on frontendmentor), otherwise it never updates.
-	const startDate = new Date('March 26, 2024 01:12:00');
+	const startDate = new Date('April 14, 2024 01:12:00');
 	//calculate end date : the date 56 days from startDate
     const startDatePlus56Days = startDate.addDays(56);
 	//calculate the number of days in between the end date and the current date (now), and display it as 'days left'.
