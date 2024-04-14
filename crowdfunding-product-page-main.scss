@@ -168,6 +168,15 @@ body {
       display:block;
     }
   }
+  progress{
+    width:$container__form-xs;
+    &::-webkit-progress-value{
+      @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+    }
+    @include media-breakpoint-up(xxl){
+      width:$container__form-l;
+    }
+  }
   .mobile{
     display:block;
     @include media-breakpoint-up(xxl){

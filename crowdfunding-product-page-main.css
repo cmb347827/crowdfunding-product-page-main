@@ -13009,6 +13009,14 @@ body {
     @media (min-width: 1440px) {
       #main .desktop {
         display: block; } }
+  #main progress {
+    width: 375px; }
+    #main progress::-webkit-progress-value {
+      background-color: Aquamarine4;
+      background-color: #3cb4ac; }
+    @media (min-width: 1440px) {
+      #main progress {
+        width: 992px; } }
   #main .mobile {
     display: block; }
     @media (min-width: 1440px) {
