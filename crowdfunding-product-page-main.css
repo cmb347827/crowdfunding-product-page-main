@@ -12933,6 +12933,15 @@ body {
   .bookmark-blue svg circle {
     fill: #3cb4ac; }
 
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1; }
+
 .disabled-overlay {
   opacity: 0.5; }
 
@@ -12966,16 +12975,19 @@ body {
     position: relative;
     bottom: 15px; }
   #header #nav a {
-    color: White;
-    color: white; }
+    color: Black;
+    color: black; }
     @media (min-width: 1440px) {
-      #header #nav a:hover {
-        cursor: pointer; } }
+      #header #nav a {
+        color: White;
+        color: white; }
+        #header #nav a:hover {
+          cursor: pointer; } }
   @media (max-width: 1439.98px) {
     #header #nav #navbarCollapse .navbar-nav {
       padding: 30px 10px;
-      background-color: Black;
-      background-color: black;
+      background-color: White;
+      background-color: white;
       position: absolute;
       right: -15px;
       top: -1em;
@@ -13009,6 +13021,9 @@ body {
     position: relative;
     top: -35px;
     display: block; }
+  #main .font-color-green {
+    color: Aquamarine4;
+    color: #3cb4ac; }
   #main dialog {
     width: 375px; }
     @media (min-width: 1440px) {
@@ -13019,9 +13034,12 @@ body {
         width: 768px; } }
     #main dialog form .inner-pledge-collapse {
       min-height: 100px; }
-  #main .green-font {
-    color: Aquamarine4;
-    color: #3cb4ac; }
+    #main dialog form .font-color-black-green-onhover {
+      color: Black;
+      color: black; }
+      #main dialog form .font-color-black-green-onhover:hover {
+        color: Aquamarine4;
+        color: #3cb4ac; }
   #main .green {
     background-color: Aquamarine4;
     background-color: #3cb4ac; }
@@ -13046,6 +13064,8 @@ body {
     height: 40px;
     border: none;
     border-radius: 20px; }
+    #main button:hover {
+      cursor: pointer; }
   #main .btnWidth-150 {
     width: 150px; }
   #main .btnWidth-200 {

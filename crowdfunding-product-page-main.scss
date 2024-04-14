@@ -75,6 +75,15 @@ body {
     }
   }   
 }
+.overlay{
+  position: fixed;
+  width: 100%; 
+  height: 100%; 
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: -1; 
+}
 
 .disabled-overlay{
   opacity:0.5;
@@ -115,8 +124,9 @@ body {
     }
     
     a{
-      @include font-color(map-get($colors,white),nth($fallback-colors,1));
+      @include font-color(map-get($colors,Black),nth($fallback-colors,2));
       @include media-breakpoint-up(xxl){
+        @include font-color(map-get($colors,White),nth($fallback-colors,1));
         &:hover{
           cursor:pointer;
         }
@@ -127,7 +137,7 @@ body {
       @include media-breakpoint-down(xxl){
          .navbar-nav{
             @include padding(30px 10px);
-            @include bg-color(map-get($colors,black),nth($fallback-colors,2));
+            @include bg-color(map-get($colors,White),nth($fallback-colors,1));
             
             //position absolute is used, so the menu is positioned on-top of header background without pushing contents down.
             position: absolute;
@@ -172,6 +182,10 @@ body {
     top:-35px;
     display:block;
   }
+
+  .font-color-green{
+    @include font-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+  }
   dialog{
     width:$container__form-xs;
     @include media-breakpoint-up(xxl){
@@ -186,11 +200,16 @@ body {
       .inner-pledge-collapse{
         min-height: 100px;
       }
+      
+      .font-color-black-green-onhover{
+        @include font-color(map-get($colors,Black),nth($fallback-colors,2));
+        &:hover{
+          @include font-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
+        }
+      }
     }
   }
-  .green-font{
-    @include font-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
-  }
+  
   .green{
     @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
     &:hover{
@@ -222,6 +241,9 @@ body {
     height: 40px;
     border:none;
     border-radius: 20px;
+    &:hover{
+      cursor:pointer;
+    }
   }
   .btnWidth-150{
     width: 150px;

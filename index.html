@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.css" integrity="sha512-FH8aHFPbx/WeYvio2Fe/pZZTLwMe6TogMgQhXSspTK13X/mSwUdg+CGuqi/00POqqGWe/FlvtDFk+D9TFJYtPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel='stylesheet' href='crowdfunding-product-page-main.css' type='text/css'>
     <title>Frontend Mentor | Crowdfunding product page</title>
 
@@ -24,9 +25,9 @@
              </button>
              <div class="collapse navbar-collapse d-xxl-flex justify-content-end" id="navbarCollapse">
                   <div class="navbar-nav">
-                     <a href="#" class="nav-item nav-link active">About</a>
-                     <a href="#" class="nav-item nav-link">Blog</a>
-                     <a href="#" class="nav-item nav-link">Account</a>
+                     <a href="#" class="nav-item nav-link active ">About</a>
+                     <a href="#" class="nav-item nav-link ">Blog</a>
+                     <a href="#" class="nav-item nav-link ">Account</a>
                   </div>
               </div> 
               <div class="overlay hide"></div>
@@ -79,7 +80,7 @@
                 <div class="mt-5 mb-5 p-xxl-4 p-1 js-disabled-overlay">
                         <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between">
                             <h3>Bamboo Stand</h3>
-                            <h4 class="green-font">Pledge <span class='js-donate-25'>0</span> or more</h4>
+                            <h4 class="font-color-green">Pledge <span class='js-donate-25'>0</span> or more</h4>
                         </div>
                         <p>You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
                         you’ll be added to a special Backer member list.</p>
@@ -91,7 +92,7 @@
                 <div class="mt-5 mb-5 p-xxl-4 p-1 js-disabled-overlay">
                         <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between">
                             <h3>Black Edition Stand</h3>
-                            <h4 class="green-font">Pledge <span class='js-donate-75'>0</span> or more</h4>
+                            <h4 class="font-color-green">Pledge <span class='js-donate-75'>0</span> or more</h4>
                         </div>
                         <p>You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
                         member list. Shipping is included.</p>
@@ -103,7 +104,7 @@
                 <div class="mt-5 mb-5 p-xxl-4 p-1 js-disabled-overlay">
                         <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between">
                             <h3>Mahogany Special Edition</h3>
-                            <h4 class="green-font">Pledge <span class='js-donate-200'>0</span> or more</h4>
+                            <h4 class="font-color-green">Pledge <span class='js-donate-200'>0</span> or more</h4>
                         </div>
                         <p>You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
                         to our Backer member list. Shipping is included.</p>
@@ -148,9 +149,9 @@
                                             <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between ">
                                                 <div>
                                                     <input data-disabled="false" value="25" type='radio' name='pledge' id='pledge-25-selected' class="js-pledge-reward">
-                                                    <label aria-label='Here you check the pledge but don"t select it yet' for="pledge-25-selected">Bamboo Stand</label>
+                                                    <label class='font-color-black-green-onhover' aria-label='Here you check the pledge but don"t select it yet' for="pledge-25-selected">Bamboo Stand</label>
                                                 </div>
-                                                <p class="green-font">Pledge <span class="js-donate-25 ">0</span> or more</p>
+                                                <p class="ms-3 font-color-green">Pledge <span class="js-donate-25 ">0</span> or more</p>
                                             </div>
                                             <p class="desktop"><span class="bamboo-left fw-bold fs-3">101</span> left</p>
                                         </div>
@@ -176,9 +177,9 @@
                                             <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between ">
                                                 <div>
                                                     <input data-disabled="false" value='75' type="radio" name="pledge" id="pledge-75-selected" class="js-pledge-reward">
-                                                    <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-75-selected' class="green-font">Black Edition Stand</label>
+                                                    <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-75-selected' class="font-color-black-green-onhover">Black Edition Stand</label>
                                                 </div>
-                                                <p class="green-font">Pledge <span class="js-donate-75">0</span> or more</p>
+                                                <p class="ms-3 font-color-green">Pledge <span class="js-donate-75">0</span> or more</p>
                                             </div>
                                             <p class="desktop"><span class="black-left fw-bold fs-3">64 </span>left</p>
                                         </div>
@@ -204,9 +205,9 @@
                                             <div class="d-flex flex-xxl-row flex-column justify-content-xxl-between ">
                                                 <div>
                                                     <input data-disabled="false" value='200' type="radio" name="pledge" id="pledge-200-selected" class="js-pledge-reward">
-                                                    <label aria-label='Here you check the pledge but don"t select it yet' for='pledge-200-selected' class="green-font">Mahogany Special Edition</label>
+                                                    <label class="font-color-black-green-onhover" aria-label='Here you check the pledge but don"t select it yet' for='pledge-200-selected'>Mahogany Special Edition</label>
                                                 </div>
-                                                <p class="green-font">Pledge <span class="js-donate-200">0</span> or more</p>
+                                                <p class="ms-3 font-color-green">Pledge <span class="js-donate-200">0</span> or more</p>
                                             </div>
                                             <p class="desktop"><span class="mahogany-left fw-bold fs-3">1</span> left</p>
                                         </div>
@@ -230,13 +231,13 @@
                         </fieldset>
                     </form>
             </dialog>
-            <dialog id="success-message" class="js-second-modal text-center smaller-width">
+            <dialog id="success-message" class="js-second-modal text-center smaller-width border-0">
                 <!-- Success modal start -->
                 <img src="./images/icon-check.svg" width="64" height="64" alt="">
                 <h5>Thanks for your support!</h5>
                 <p>Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
                 an email once our campaign is completed.</p>
-                <button class='js-closeSuccess' type='button'>Got it!</button>
+                <button class='js-closeSuccess btnWidth-150 green' type='button'>Got it!</button>
                <!-- Success modal end -->
             </dialog>
       </main>
@@ -249,7 +250,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.min.js" referrerpolicy="no-referrer"></script>
         <script src='crowdfunding-product-page-main.js'></script>
 </body>
 </html>

@@ -76,6 +76,7 @@ Users should be able to:
 ### Useful resources
 
 -[Creating a collapsable with input and just css](https://stackoverflow.com/questions/61011140/how-do-i-create-a-collapsible-element-with-just-css-using-input-and-labels)
+-[Polyfill for dialog](https://github.com/GoogleChrome/dialog-polyfill)
 
 -[How to ensure an event is fired only once in JS](https://www.educative.io/answers/how-to-ensure-an-event-listener-is-only-fired-once-in-javascript)
 ## Author

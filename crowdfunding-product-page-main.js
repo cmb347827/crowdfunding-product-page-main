@@ -359,7 +359,15 @@ function loadButton(data){
 	}
 	
 }
+function registerDialogs(){
+   const dialogs = document.querySelectorAll('dialog');
+   dialogs.forEach((dialog)=>{
+	  dialogPolyfill.registerDialog(dialog);
+   });
+}
+
 $(window).on('load',function(){
+   registerDialogs();
    loadDonations();
    loadButton(data);
    handlebackProject();
