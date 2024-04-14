@@ -368,11 +368,13 @@ function registerDialogs(){
 }
 
 $(window).on('load',function(){
-   registerDialogs();
+   //display the progress bar.
+   dataProgress();
    loadDonations();
    loadButton(data);
-   handlebackProject();
    display();
+   registerDialogs();
+   handlebackProject();
    handleNavBar();
    
 });
