@@ -369,10 +369,10 @@ function registerDialogs(){
 
 $(window).on('load',function(){
    //display the progress bar.
-   //dataProgress();
+   dataProgress();
    loadDonations();
    loadButton(data);
-   //display();
+   display();
    registerDialogs();
    handlebackProject();
    handleNavBar();
