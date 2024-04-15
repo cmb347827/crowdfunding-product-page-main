@@ -52,12 +52,13 @@ body {
   }
 }
 
-//adds a green border when a pledge is checked
+//adds a green border when a pledge input is checked in the 'back this project' modal
 .inner:has(input[type='radio']:checked  ) {      
     border:3px solid map-get($colors,Dark cyan);
 }
 
 .bookmark-gray{
+  //bookmark button class used on load/bookmark text see JS
   @include bg-color(lighten(map-get($colors,Dark Gray),18),nth($fallback-colors,3));
   @include font-color(map-get($colors,Black),nth($fallback-colors,2));
   svg{
@@ -67,6 +68,7 @@ body {
   }
 }
 .bookmark-blue{
+  //bookmark button class used to change color and text to 'bookmarked' see JS
   @include bg-color(lighten(map-get($colors,Moderate cyan),18),nth($fallback-colors,4));
   @include font-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
   svg {
@@ -75,6 +77,7 @@ body {
     }
   }   
 }
+//overlay class added when menu is opened in mobile see JS
 .overlay{
   position: fixed;
   width: 100%; 
@@ -84,7 +87,7 @@ body {
   background-color: rgba(0,0,0,0.5); 
   z-index: -1; 
 }
-
+//disabled overlay class added when a pledge is out of stock see JS 
 .disabled-overlay{
   opacity:0.5;
 }
@@ -118,6 +121,7 @@ body {
   z-index:0;
   
   #nav{
+    //mobile menu scss.
     #menubutton{
        position:relative;
        bottom: 15px;
@@ -169,6 +173,7 @@ body {
     }
   }
   progress{
+    //the progress bar 
     width:$container__form-xs;
     &::-webkit-progress-value{
       @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
@@ -220,6 +225,7 @@ body {
   }
   
   .green{
+    //used for button colors
     @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
     &:hover{
       @include bg-color(map-get($colors,Dark cyan),nth($fallback-colors,5));
@@ -264,13 +270,16 @@ body {
     @include bg-color(map-get($colors,Moderate cyan),nth($fallback-colors,4));
   }
   .inner-pledge-collapse{
+    //the collapsable div section , within 'back this project', is hidden at first load of modal. Displays when the user clicks the pledge input , see below(*)
     display:none;
   }
   .inner:has([name=pledge]:checked)  .inner-pledge-collapse{
+    //here (*)
     display:block;
   }
   
   .toggle{
+    //change the appearance of the toggle , white on load.
     appearance: none;
     width: 62px;
     height: 32px;
@@ -297,6 +306,7 @@ body {
   }
   
   .toggle:focus{
+    //when the user clicks the input, it will become blue and the toggle::before moves position.
     @include bg-color(lighten(map-get($colors,Moderate cyan),12),nth($fallback-colors,4));
 
     &::before{
