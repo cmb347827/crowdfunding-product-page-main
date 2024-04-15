@@ -51,6 +51,8 @@ Users should be able to:
 
 
 ### What I learned
+
+- JUST TEMPORARY TEXT BELOW FOR MEMORY RETAINMENT , NEED TO TILL THIS OUT STILL ! 
 - I could re-use code from my insure project for the header nav section.
 - couldn't use bootstrap collapse for the pledge inner sections on input select(because input used vs button or anchor)
 - I'm also updating the amount of pledges that are left, as well as updating the button text if none are left, and I'm updating the number of days left.
