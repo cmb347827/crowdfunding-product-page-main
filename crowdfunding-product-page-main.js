@@ -70,11 +70,11 @@ function handleNavBar(){
 function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
 	(collapsedInputs).forEach((toggle)=>{
         toggle.setAttribute('aria-disabled','false');
-		$('input').removeAttr('checked');
+		toggle.removeAttribute('checked');
 	});
 	(noncollapsedInputs).forEach((toggle)=>{
         toggle.setAttribute('aria-disabled','false');
-		$('input').removeAttr('checked');
+		toggle.removeAttribute('checked');
 	});
 	(noncollapsedInputs).forEach((input,index)=>{
 		//the non-collapsable input of the popped up 'back this project'
@@ -87,12 +87,12 @@ function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
 					//the 'out of stock' pledge.
 					//disable the js-pledge-reward input
 					input.setAttribute('aria-disabled','true');
-					$('input').removeAttr('checked');
+					input.removeAttribute('checked');
 					//also disable the accompanying collapsable toggle class input
 					(collapsedInputs).forEach((toggle,indexToggle)=>{
 						if(indexToggle=== pledgeIndex){
 							toggle.setAttribute('aria-disabled','true');
-						   $('toggle').removeAttr('checked');
+							toggle.removeAttribute('checked');
 						}
 					});
 				}else{
@@ -160,6 +160,7 @@ function handleSuccess(){
 		if(emptyPledges){
             addDisabledOverlay(emptyPledges);
 		}
+		
 		(data.second_dialog).close();
 	}, {once : true});
 }
@@ -253,7 +254,7 @@ function display(){
 		    const aria= input.getAttribute('aria-disabled');
 		    if(aria === 'false'){
 				//remove checked status, so user could later pledge more pledges.
-				$('input').removeAttr('checked');
+				input.removeAttribute('checked');
 				//check if 'enter your pledge' toggle button is clicked example id='pledge-0-checked', it means the value of the pledge can then be added to the 'raised' amount + number of backers increased by 1
 				indexInput=index;
 			}
@@ -266,9 +267,9 @@ function display(){
             const aria= toggle.getAttribute('aria-disabled');
 			if(aria === 'false'){
 				//remove checked status, so user could pledge more pledges.
-				$('toggle').removeAttr('checked');
+				toggle.removeAttribute('checked');
 				//disable the pressed toggle button so the user cant double/triple click. Enabled again in disableOutStockInputs().(zie aria===false)
-				//can only choose each pledge once every time the 'back this project' modal pops up !!! 
+				//can only choose EACH PLEDGE ONCE every time the 'back this project' modal pops up !!! This makes sense in expected behaviour 
 				toggle.setAttribute('aria-disabled','true');
 				
 				if((indexInput===index) ){
@@ -368,8 +369,7 @@ function registerDialogs(){
 }
 
 $(window).on('load',function(){
-   //display the progress bar.
-   dataProgress();
+
    loadDonations();
    loadButton(data);
    display();

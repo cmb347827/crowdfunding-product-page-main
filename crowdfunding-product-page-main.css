@@ -13085,7 +13085,7 @@ body {
     display: none; }
   #main .inner:has([name=pledge]:checked) .inner-pledge-collapse {
     display: block; }
-  #main .toggle, #main .toggle:not(:checked) {
+  #main .toggle {
     appearance: none;
     width: 62px;
     height: 32px;
@@ -13106,15 +13106,10 @@ body {
     background: gray;
     left: 35px;
     transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s; }
-  #main .toggle:checked {
+  #main .toggle:focus {
     background-color: Aquamarine4;
     background-color: #62cbc4; }
-    #main .toggle:checked:not(:focus) {
-      background-color: White;
-      background-color: white; }
-      #main .toggle:checked:not(:focus)::before {
-        left: 35px; }
-    #main .toggle:checked::before {
+    #main .toggle:focus::before {
       left: 60px; }
   #main .white-non-opaque-background {
     background-color: white; }

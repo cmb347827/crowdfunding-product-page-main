@@ -270,7 +270,7 @@ body {
     display:block;
   }
   
-  .toggle,.toggle:not(:checked){
+  .toggle{
     appearance: none;
     width: 62px;
     height: 32px;
@@ -296,15 +296,9 @@ body {
     transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
   }
   
-  .toggle:checked {
+  .toggle:focus{
     @include bg-color(lighten(map-get($colors,Moderate cyan),12),nth($fallback-colors,4));
-    &:not(:focus){
-      @include bg-color(lighten(map-get($colors,white),12),nth($fallback-colors,1));
-      //resets the toggle button position to start when toggle is out of focus(dialog close).
-      &::before{
-        left:35px;
-      }
-    }
+
     &::before{
       //once the toggle is checked, the toggle button moves to the right.
       left: 60px;
