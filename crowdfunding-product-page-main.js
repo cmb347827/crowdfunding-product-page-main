@@ -45,7 +45,7 @@ $(window).resize(function(){
 });
 
 function handleNavBar(){
-	//show/close the menu 
+	//show/close the top right menu in mobile view.
 	(data.navbar).addEventListener('change',()=>{
 		
 		this.on("show.bs.collapse", function(){
@@ -59,7 +59,7 @@ function handleNavBar(){
 			$('#open').toggleClass('hidden');
 		});
 	});
-	//on opened menu , add background color to cover main
+	//on opened menu , add background color to cover main ,only in mobile view.
 	(data.openNav).addEventListener('click',()=>{
 		//document.querySelector(".overlay").style.display = "block";
 		$('.overlay').toggleClass('show');
@@ -68,27 +68,30 @@ function handleNavBar(){
 
 
 function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
+	//removes 'checked' attribute from the 'toggle' inputs
 	(collapsedInputs).forEach((toggle)=>{
         toggle.setAttribute('aria-disabled','false');
 		toggle.removeAttribute('checked');
 	});
+	//removes 'checked' attribute from the 'js-pledge-reward' inputs
 	(noncollapsedInputs).forEach((toggle)=>{
         toggle.setAttribute('aria-disabled','false');
 		toggle.removeAttribute('checked');
 	});
 	(noncollapsedInputs).forEach((input,index)=>{
-		//the non-collapsable input of the popped up 'back this project'
+		//the non-collapsable input of the popped up 'back this project' modal.
 		if(index===0){
-		   //do nothing : is First js-pledge-reward input value=0, has no span with pledges left.
+		   //do nothing : is First js-pledge-reward input value=0, has no span with pledges left (pledge with no reward)
 		}else{
+			//will check to see if there are emptyPledges index values , and disable the accompanying div '.inner'
 			emptyPledges.forEach((pledgeIndex,indexInner)=>{
-				//++pledgeIndex as the numbering should be for the js-pledge-reward inputs: value=0  is index 0 (skip this), value=25 index=1 etc.
+				//++pledgeIndex as the numbering should be for the js-pledge-reward inputs: skip value=0, only look from value=25 index=1 etc.
 				if(index===(++pledgeIndex)){
-					//the 'out of stock' pledge.
+					//found the 'out of stock' pledge.
 					//disable the js-pledge-reward input
 					input.setAttribute('aria-disabled','true');
 					input.removeAttribute('checked');
-					//also disable the accompanying collapsable toggle class input
+					//also disable the accompanying collapsable .toggle class input
 					(collapsedInputs).forEach((toggle,indexToggle)=>{
 						if(indexToggle=== pledgeIndex){
 							toggle.setAttribute('aria-disabled','true');
@@ -96,6 +99,7 @@ function disableOutStockInputs(emptyPledges,noncollapsedInputs,collapsedInputs){
 						}
 					});
 				}else{
+					//no 'out of stock' pledge found
 					input.setAttribute('aria-disabled','false');
 				}
 			});
@@ -111,7 +115,10 @@ function handlebackProject(){
 		btn.addEventListener('click',(event)=>{
 			const aria= btn.getAttribute('aria-disabled');
 			if(aria === 'false'){
+				//btn has not been disabled
+				//pop up the 'back this project' popup
                 (data.first_dialog).showModal();
+				//loads the donation amounts in the 'back this project' popup.
 				loadDonations();
 			}
 		});
@@ -131,12 +138,15 @@ function handlebackProject(){
 }
 function addDisabledOverlay(emptypledges){
     emptypledges.forEach((emptypledge,index)=>{
+		//for each emptypledge, which is an index (index 0= bamboo etc) zie const pledges = [data.bamboo_left,data.black_left,data.mahogany_left]; getoutofstockpledges()
        (data.disabledOverlay).forEach((divTodisable,innerIndex)=>{
+		   //if empty pledge is present, add overlay class to elements that have the js-disabled-overlay class added (zie html lines 86,98,110)
 		   if(emptypledge===innerIndex){
 			  $(divTodisable).addClass('disabled-overlay');
 		   }
 	   });
 	   (data.disabledOverlayModal).forEach((divTodisable,innerIndex)=>{
+		    //if empty pledge is present, add overlay class to elements that have the js-disabled-overlay-modal class added(zie html lines 152,180,208)
 			if(emptypledge===innerIndex){
 			  $(divTodisable).addClass('disabled-overlay');
 			}
@@ -145,9 +155,9 @@ function addDisabledOverlay(emptypledges){
 	
 }
 function handleSuccess(){
-	//show success message 
+	//Popups the success message modal.
 	(data.second_dialog).showModal();
-	//close success message
+	//will close success message modal 
 	data.closeSuccess.addEventListener('click',(event)=>{
 		//Disable the 'out of stock' pledge buttons
 		const outofstockPledges =getOutofstockpledges();
@@ -160,7 +170,7 @@ function handleSuccess(){
 		if(emptyPledges){
             addDisabledOverlay(emptyPledges);
 		}
-		
+		//close success message modal
 		(data.second_dialog).close();
 	}, {once : true});
 }
@@ -176,15 +186,14 @@ function dataProgress(){
 }
 
 
-//resultarray: bamboo=0,black=1,mahogany=2  so ++1 as 'back this project' button is 0
-//selectRewardBtns= 0 (skip),1 ,2, 3.
+//resultarray: bamboo=0,black=1,mahogany=2 , 'back this project' should not be included.
+//selectRewardBtns (skip index 0, is 'back this project' button, not a pledge amount 25,75, or 200).
 function setButtonTextDisabled(resultArray){
 	(data.selectRewardBtns).forEach((btn,indexOuter)=>{
 		resultArray.forEach((pledgeindex,index)=>{
-			//SKIP indexOuter=0 so the topmost 'select reward' button (next to the bookmark) isn't included.
-			//add 1 to pledgeindex , as pledges array is 0-2 and selectRewardBtns(indexOuter) 1-3 (skipped first)
-			if(indexOuter>0){
-		        ++pledgeindex;
+			//++pledgeindex and indexOuter>0, as pledges array is 0-2 ,so selectRewardBtns 1-3 will skip the 'back this project' button if btn is 'back this project' button
+			if(indexOuter>0){ //skip 'back this project'
+		        ++pledgeindex;//bamboo is now 1 instead of 0 (selectRewardBtns)
 				if(indexOuter===pledgeindex){
 					btn.textContent= 'Out of stock';                               
 					btn.setAttribute('aria-disabled','true');
@@ -200,20 +209,23 @@ function setButtonTextDisabled(resultArray){
 
 
 function updateLeft(amount){
-	
+	//updates the amount of pledges left for bamboo,black, and mahogany.
 	if(amount===data.donateAllAmounts[1]){
+		//amount donated is same as amount in donateAllAmounts[1] = 25
 		(data.bamboo_left).forEach((leftSpan,index)=>{
 			let pledgesLeft= Number(leftSpan.textContent);
 			leftSpan.textContent=--pledgesLeft;
 		});
 	} 
 	if(amount===data.donateAllAmounts[2]){
+		//amount donated is same as amount in donateAllAmounts[2] = 75
 		(data.black_left).forEach((leftSpan,index)=>{
 			let pledgesLeft= Number(leftSpan.textContent);
 			leftSpan.textContent=--pledgesLeft;
 		});
 	} 
 	if(amount === data.donateAllAmounts[3]){
+		//amount donated is same as amount in donateAllAmounts[3] = 200
 		(data.mahogany_left).forEach((leftSpan,index)=>{
 			let pledgesLeft= Number(leftSpan.textContent);
 			leftSpan.textContent=--pledgesLeft;
@@ -228,6 +240,7 @@ function getOutofstockpledges(){
     pledges.forEach((pledgeItem,indexPledge)=>{
 		let pledgesLeft= Number(pledgeItem[0].textContent);
         if(pledgesLeft===0){
+			//empty pledge found, add it's index (in pledges array) to the resultArr array.
 			resultArr.push(indexPledge);
 		}
 	});
@@ -235,7 +248,7 @@ function getOutofstockpledges(){
 }
 
 function display(){
-   //display the correct buttons text/disables and correct input disables (from out-of-stock pledges)
+   //display the correct buttons text/disables and correct input disables (from out-of-stock pledges) on load.
    const indexArray =getOutofstockpledges();
    setButtonTextDisabled(indexArray);
    disableOutStockInputs(indexArray,data.pledgeReward,data.toggleInputs);
@@ -253,6 +266,7 @@ function display(){
 	  
         input.addEventListener('click',(event)=>{
 		    const aria= input.getAttribute('aria-disabled');
+	        //if the button is not disabled, proceed.
 		    if(aria === 'false'){
 				//remove checked status, so user could later pledge more pledges.
 				input.removeAttribute('checked');
@@ -266,11 +280,13 @@ function display(){
 		//toggle button is clicked
 		toggle.addEventListener('click',(event)=>{
             const aria= toggle.getAttribute('aria-disabled');
+			//if input is not disabled, proceed.
 			if(aria === 'false'){
-				//remove checked status, so user could pledge more pledges.
+				//remove checked status, so user could pledge more pledges after 'back this project' modal is closed and opened again.
 				toggle.removeAttribute('checked');
-				//disable the pressed toggle button so the user cant double/triple click. Enabled again in disableOutStockInputs().(zie aria===false)
-				//can only choose EACH PLEDGE ONCE every time the 'back this project' modal pops up !!! This makes sense in expected behaviour 
+				//but disable the pressed toggle button so the user cant double/triple click when the modal is opened, during the same opended modal. 
+				//This ensures the user can only choose EACH PLEDGE ONCE every time the 'back this project' modal pops up !!! This makes sense in expected behaviour 
+				//Enabled again first in disableOutStockInputs().(zie aria===false) when the 'success' modal is closed 
 				toggle.setAttribute('aria-disabled','true');
 				
 				if((indexInput===index) ){
@@ -311,6 +327,7 @@ function updateDays(){
 
 }
 function loadDonations(){
+	//loads the donation amounts dynamically (see donateAllAmounts in data).This way, the amounts can be changed at a later time.
 	(data.donate0).forEach((element)=>{
         element.textContent = `$${(data.donateAllAmounts)[0]}`;
 	});
@@ -325,6 +342,8 @@ function loadDonations(){
 	});
 }
 
+
+//The top right bookmark button's code.When it's clicked it's appearance is updated in loadButton.
 (data.bookmark).addEventListener('click',() => loadButton(data));
 
 function loadButton(data){
@@ -363,6 +382,7 @@ function loadButton(data){
 	
 }
 function registerDialogs(){
+	//needed because of the dialog element.
    const dialogs = document.querySelectorAll('dialog');
    dialogs.forEach((dialog)=>{
 	  dialogPolyfill.registerDialog(dialog);
