@@ -171,7 +171,8 @@ function dataProgress(){
 	const total = Number((data.total).textContent.replace(',',''));
 	let progressWidth=raised/total *100;
    
-    $(data.progress).css('width',`${progressWidth}%`);
+    //$(data.progress).css('width',`${progressWidth}%`);
+	data.progress.value = progressWidth;
 }
 
 

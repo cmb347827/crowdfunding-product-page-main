@@ -52,22 +52,20 @@ Users should be able to:
 
 ### What I learned
 
-- JUST TEMPORARY TEXT BELOW FOR MEMORY RETAINMENT , NEED TO TILL THIS OUT STILL ! 
-- I could re-use code from my insure project for the header nav section.
-- couldn't use bootstrap collapse for the pledge inner sections on input select(because input used vs button or anchor)
 - I'm also updating the amount of pledges that are left, as well as updating the button text if none are left, and I'm updating the number of days left.
-- dialog : first tried to get modal behaviour by disabling buttons myself
-- after version2 , realized not aria friendly, used aria-disabled instead. first tried variables for btn-disabled , then data-disabled(auto false)
-
-
-- fussy for grayed out background on popup : first tried filter:grayscale (using a removeclass in js), then html background color + .addOpacity to make visible, .white-non-opaque-background to remove this from popup , added in js.
-- changed addOpacity to ::backdrop??
-
-- Could make toggle work with bootstrap 5 toggle, but the image and text would appear on two lines for bookmarked, didn't see a way to change.
-  so had to delete that and try something else.zie link.
-- added , {once : true} to handleSuccess or it would be called twice, on teh second round of trying to close the success message.zie link
-- updatedays (js links)
-- spanleft.textcontent = number(spanleft.textcontent)  does not save to number type, wel console.log(number(spanleft.textcontent));
+- I could re-use code from my insure-landing-page-master project for the header nav section.
+- couldn't use Bootstrap collapse for the pledge inner sections on input select because Bootstrap collapse only works for buttons and anchors, not input.(see link)
+- I first tried to get the 'disabled background' behaviour myself , by disabling all the background buttons and adding some overlay. But, I quickly ran 
+  into problems, as disabling buttons isn't Aria friendly and by using Aria attributes it became very daunting and wouldn't work.
+  Someone pointed the use of Dialog out to me (see link) and that was the push in the right direction that I needed (see link)
+- By the time I had finished a version of my code (in ignore-old-js folder, see Copy-2) , I realized it was not Aria friendly,as I simply disabled the background buttons using `btn.disabled=true`  instead of  `btn.setAttribute('aria-disabled','true')`. 
+- I had a lot of trouble getting the grayed out/disabled background look when the 'Back our project' modal popped up. First I tried using `filter:grayscale;`(by adding/removing css classes in JS), but that did not work as expected. I did manage to get something working using `opacity:0.5;` so a background color would become visible on adding/removing classes (which I had added to my 'addOpacity' class in my CSS then ). And I used a class in css ('show-for-all-screens') to hide/display the 'Back our project' modal to make it appear 'popped up'. 
+- When I first discoverd the dialog element I immediately tried to change from using my 'addOpacity' CSS class to using the CSS ::backdrop property, but it wasn't needed as the default gray color worked.
+- When it came to coding the 'bookmark' button, I could make a toggle work with Bootstrap 5 toggle, but the image and text would appear on two lines for 'bookmarked', and I didn't see a way to change it (see link)
+- I also discovered the use of `{once : true}` which I needed to add to the handleSuccess function or it would be called twice with the double 'click' event (see link)
+- For the updateDays function I could use an addDays function from a Stackoverflow post and add it to my code (see link)
+- I also , somehow, only now noticed that `element.textcontent = Number(element.textcontent)`  does not save to number type, had to save to another variable instead `const raised= Number((data.raised).textContent);` and then convert back using toLocaleString.
+- Thanks to freecodecamp help, solved an issue I had with the progress bar (see link)
 
 
 
@@ -77,9 +75,19 @@ Users should be able to:
 
 ### Useful resources
 
--[Creating a collapsable with input and just css](https://stackoverflow.com/questions/61011140/how-do-i-create-a-collapsible-element-with-just-css-using-input-and-labels)
+[Creating a collapsable with input and just css](https://stackoverflow.com/questions/61011140/how-do-i-create-a-collapsible-element-with-just-css-using-input-and-labels)
 
--[How to ensure an event is fired only once in JS](https://www.educative.io/answers/how-to-ensure-an-event-listener-is-only-fired-once-in-javascript)
+[How to ensure an event is fired only once in JS](https://www.educative.io/answers/how-to-ensure-an-event-listener-is-only-fired-once-in-javascript)
+
+[freecodecame forum post help](https://forum.freecodecamp.org/t/disabling-a-button-or-input-type-checkbox-using-aria-disabled/683462/10)
+
+[Bootstrap 5 toggle](https://palcarazm.github.io/bootstrap5-toggle/#custom-text)
+
+[addDays function](https://stackoverflow.com/questions/563406/how-to-add-days-to-date)
+
+[freecodecamp forum post progress bar](https://forum.freecodecamp.org/t/progress-bar-not-behaving-as-expected/685406/3)
+
+
 ## Author
 
 - Website - [One of my latest codepens](https://codepen.io/cynthiab72/pen/oNybYON)
